@@ -22,7 +22,7 @@ merged_df = pd.merge(merged_df, daten_3, how='outer', on='Datum')
 
 merged_df.shape
 print(merged_df)
-
+print(merged_df)
 
 
 # Print the first 5 rows of the merged DataFrame
