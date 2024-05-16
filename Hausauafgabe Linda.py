@@ -55,7 +55,7 @@ plt.title('Verteilung der Warengruppen')
 plt.ylabel('')
 plt.show()
 
-# Scatterplot mit Trendlinie
+# Scatterplot 
 plt.figure(figsize=(8, 6))
 
 # Scatterplot der Daten
