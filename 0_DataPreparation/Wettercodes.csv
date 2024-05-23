@@ -1,0 +1,110 @@
+Wettercode,Beschreibung
+0,Bewoelkungsentwicklung nicht beobachtet
+1,Bewoelkung abnehmend
+2,Bewoelkung unveraendert
+3,Bewoelkung zunehmend
+4,Sicht durch Rauch oder Asche vermindert
+5,trockener Dunst (relative Feuchte < 80 %)
+6,verbreiteter Schwebstaub- nicht vom Wind herangefuehrt
+7,Staub oder Sand bzw. Gischt- vom Wind herangefuehrt
+8,gut entwickelte Staub- oder Sandwirbel
+9,Staub- oder Sandsturm im Gesichtskreis- aber nicht an der Station
+10,feuchter Dunst (relative Feuchte > 80 %)
+11,Schwaden von Bodennebel
+12,durchgehender Bodennebel
+13,Wetterleuchten sichtbar- kein Donner gehoert
+14,Niederschlag im Gesichtskreis- nicht den Boden erreichend
+15,Niederschlag in der Ferne (> 5 km)- aber nicht an der Station
+16,Niederschlag in der Naehe (< 5 km)- aber nicht an der Station
+17,Gewitter (Donner hoerbar)- aber kein Niederschlag an der Station
+18,Markante Boeen im Gesichtskreis- aber kein Niederschlag an der Station
+19,Tromben (trichterfoermige Wolkenschlaeuche) im Gesichtskreis
+20,nach Spruehregen oder Schneegriesel
+21,nach Regen
+22,nach Schneefall
+23,nach Schneeregen oder Eiskoernern
+24,nach gefrierendem Regen
+25,nach Regenschauer
+26,nach Schneeschauer
+27,nach Graupel- oder Hagelschauer
+28,nach Nebel
+29,nach Gewitter
+30,leichter oder maessiger Sandsturm- an Intensitaet abnehmend
+31,leichter oder maessiger Sandsturm- unveraenderte Intensitaet
+32,leichter oder maessiger Sandsturm- an Intensitaet zunehmend
+33,schwerer Sandsturm- an Intensitaet abnehmend
+34,schwerer Sandsturm- unveraenderte Intensitaet
+35,schwerer Sandsturm- an Intensitaet zunehmend
+36,leichtes oder maessiges Schneefegen- unter Augenhoehe
+37,starkes Schneefegen- unter Augenhoehe
+38,leichtes oder maessiges Schneetreiben- ueber Augenhoehe
+39,starkes Schneetreiben- ueber Augenhoehe
+40,Nebel in einiger Entfernung
+41,Nebel in Schwaden oder Baenken
+42,Nebel- Himmel erkennbar- duenner werdend
+43,Nebel- Himmel nicht erkennbar- duenner werdend
+44,Nebel- Himmel erkennbar- unveraendert
+45,Nebel- Himmel nicht erkennbar- unveraendert
+46,Nebel- Himmel erkennbar- dichter werdend
+47,Nebel- Himmel nicht erkennbar- dichter werdend
+48,Nebel mit Reifansatz- Himmel erkennbar
+49,Nebel mit Reifansatz- Himmel nicht erkennbar
+50,unterbrochener leichter Spruehregen
+51,durchgehend leichter Spruehregen
+52,unterbrochener maessiger Spruehregen
+53,durchgehend maessiger Spruehregen
+54,unterbrochener starker Spruehregen
+55,durchgehend starker Spruehregen
+56,leichter gefrierender Spruehregen
+57,maessiger oder starker gefrierender Spruehregen
+58,leichter Spruehregen mit Regen
+59,maessiger oder starker Spruehregen mit Regen
+60,unterbrochener leichter Regen oder einzelne Regentropfen
+61,durchgehend leichter Regen
+62,unterbrochener maessiger Regen
+63,durchgehend maessiger Regen
+64,unterbrochener starker Regen
+65,durchgehend starker Regen
+66,leichter gefrierender Regen
+67,maessiger oder starker gefrierender Regen
+68,leichter Schneeregen
+69,maessiger oder starker Schneeregen
+70,unterbrochener leichter Schneefall oder einzelne Schneeflocken
+71,durchgehend leichter Schneefall
+72,unterbrochener maessiger Schneefall
+73,durchgehend maessiger Schneefall
+74,unterbrochener starker Schneefall
+75,durchgehend starker Schneefall
+76,Eisnadeln (Polarschnee)
+77,Schneegriesel
+78,Schneekristalle
+79,Eiskoerner (gefrorene Regentropfen)
+80,leichter Regenschauer
+81,maessiger oder starker Regenschauer
+82,aeusserst heftiger Regenschauer
+83,leichter Schneeregenschauer
+84,maessiger oder starker Schneeregenschauer
+85,leichter Schneeschauer
+86,maessiger oder starker Schneeschauer
+87,leichter Graupelschauer
+88,maessiger oder starker Graupelschauer
+89,leichter Hagelschauer
+90,maessiger oder starker Hagelschauer
+91,Gewitter in der letzten Stunde- zurzeit leichter Regen
+92,Gewitter in der letzten Stunde- zurzeit maessiger oder starker Regen
+93,Gewitter in der letzten Stunde- zurzeit leichter Schneefall/Schneeregen/Graupel/Hagel
+94,Gewitter in der letzten Stunde- zurzeit maessiger oder starker Schneefall/Schneeregen/Graupel/Hagel
+95,leichtes oder maessiges Gewitter mit Regen oder Schnee
+96,leichtes oder maessiges Gewitter mit Graupel oder Hagel
+97,starkes Gewitter mit Regen oder Schnee
+98,starkes Gewitter mit Sandsturm
+99,starkes Gewitter mit Graupel oder Hagel
+,
+,
+,
+,
+,
+,
+,
+,
+,
