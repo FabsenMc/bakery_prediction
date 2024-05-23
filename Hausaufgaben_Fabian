@@ -181,3 +181,8 @@ weather_variables = ['Bewoelkung', 'Temperatur', 'Windgeschwindigkeit', 'Wetterc
     plt.grid(True)
     plt.show()
             
+
+
+### Umsatzvariablen die erstellt werden könnten: ###
+    Gruppieren der Wetterdaten nach Regen/kein Regen etc.
+    Gruppieren 
