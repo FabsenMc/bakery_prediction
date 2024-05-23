@@ -1,0 +1,183 @@
+# import libraries before start
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Einlesen der Daten als URL
+url1 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/kiwo.csv"
+url2 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/umsatzdaten_gekuerzt.csv"
+url3 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/wetter.csv"
+url4 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/fuf.csv"
+url5 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/thw-kiel-spieltage.csv"
+
+# Überführen der Daten in DataFrames
+daten = pd.read_csv(url1) # Daten der Kiwo
+umswar = pd.read_csv(url2) # Umsätze der Warengruppen
+wetter = pd.read_csv(url3) # Wetterdaten der Kiwos
+ferien = pd.read_csv(url4, sep=";") # Feriendaten
+ferien["Datum"] = pd.to_datetime(ferien['Datum'], format='%d.%m.%Y').dt.strftime('%Y-%d-%m')
+thw = pd.read_csv(url5) # THW Kiel Spieltage
+thw["Datum"] = pd.to_datetime(thw['Datum'], format='%d.%m.%Y').dt.strftime('%Y-%d-%m')
+thw = thw.drop(columns=["Unnamed: 3"])
+
+
+# Anzeige der ersten Zeilen der DataFrames
+print(daten.head()) # Ausgabe der ersten 5 Zeilen
+print(umswar.head()) # Ausgabe der ersten 5 Zeilen 
+print(wetter.head()) # Ausgabe der ersten 5 Zeilen
+print(ferien.head()) # Ausgabe der ersten 5 Zeilen
+print(thw.head()) # Ausgabe der ersten 5 Zeilen
+
+# Die 3 DataFrames zusammenführen (mergen) in einen neuen gemeinsamen DataFrame mit der Methode "outer"
+dataf = daten.merge(umswar, on="Datum", how = "outer") \
+             .merge(wetter, on="Datum", how = "outer") \
+             .merge(ferien, on="Datum", how = "outer") \
+             .merge(thw, on="Datum", how = "outer")
+
+# Ausgabe der ersten 5 Zeilen des neuen DataFrames
+print(dataf.head())
+
+
+
+# --> ab hier gibts einen ungelösten Datumsfehler <-- #
+
+
+
+
+# Hinzufügen einer zusätzlichen Spalte mit den Wochentagen
+dataf["Datum"] = pd.to_datetime(dataf["Datum"])
+dataf["Wochentag"] = dataf["Datum"].dt.weekday
+dataf["Wochentag"] = dataf["Wochentag"].map({0: "Montag", 1: "Dienstag", 2: "Mittwoch", 3: "Donnerstag", 4: "Freitag", 5: "Samstag", 6: "Sonntag"}) -> der ML Algorythmus kann ja nur mit Zahlen umgehen
+
+# Ausgabe der ersten 5 Zeilen des neuen DataFrames
+print(dataf.head())
+
+
+###     Deskriptive Statistik erstellen     ###
+
+# Basic Eigenschaften
+
+dataf.columns
+dataf.shape
+dataf.info()
+dataf.describe() # machen nur bei einigen Variablen Sinn
+
+dataf["Umsatz"].describe()
+dataf["Warengruppe"].describe()
+
+
+# dataf Dataframe beschnitten um nur Werte anzuzeigen die mit einer Kieler Woche korreliert werden können und zu denen Umsatzdaten vorliegen
+kiwo_df = dataf[(dataf["KielerWoche"] == 1) & (dataf["Umsatz"].notnull())]
+kiwo_df.head()
+kiwo_df.describe()
+
+# dataf Dataframe beschnitten um nur Werte anzuzeigen zu denen Umsatzdaten vorliegen
+umsatz_df = dataf[(dataf["Umsatz"].notnull())]
+umsatz_df.head()
+umsatz_df.describe()
+
+
+###        Visualisierung erstellen         ###
+
+# Histogram und Grundparameter Statistik für Wettervariablen erstellen
+# Liste der Wettervariablen
+weather_variables = ['Bewoelkung', 'Temperatur', 'Windgeschwindigkeit', 'Wettercode']
+
+    # Schleife über jede Wettervariable über das gesamte Jahr
+    for var in weather_variables:
+        # Histogramm erstellen
+        plt.hist(dataf[var], bins=95, color='skyblue', edgecolor='black')
+        plt.xlabel(var)
+        plt.ylabel('Häufigkeit')
+        plt.title(f'Histogramm der {var}')
+        plt.grid(True)
+        plt.show()
+        
+        # Grundlegende Parameter berechnen
+        mean_var = dataf[var].mean()
+        median_var = dataf[var].median()
+        min_var = dataf[var].min()
+        max_var = dataf[var].max()
+        std_var = dataf[var].std()
+        
+        # Statistische Grundparameter ausgeben
+        print(f"\nStatistische Grundparameter für {var}:")
+        print("Mittlerer Wert:", mean_var)
+        print("Median:", median_var)
+        print("Minimum:", min_var)
+        print("Maximum:", max_var)
+        print("Standardabweichung:", std_var)
+        print("-----------------------------")
+
+    # Schleife über jede Wettervariable für die Umsatzwerte existieren über das gesamte Jahr
+
+    for var in weather_variables:
+        # Histogramm erstellen
+        plt.hist(umsatz_df[var], bins=95, color='skyblue', edgecolor='black')
+        plt.xlabel(var)
+        plt.ylabel('Häufigkeit')
+        plt.title(f'Histogramm der {var}')
+        plt.grid(True)
+        plt.show()
+        
+        # Grundlegende Parameter berechnen
+        mean_var = umsatz_df[var].mean()
+        median_var = umsatz_df[var].median()
+        min_var = umsatz_df[var].min()
+        max_var = umsatz_df[var].max()
+        std_var = umsatz_df[var].std()
+        
+        # Statistische Grundparameter ausgeben
+        print(f"\nStatistische Grundparameter für {var}:")
+        print("Mittlerer Wert:", mean_var)
+        print("Median:", median_var)
+        print("Minimum:", min_var)
+        print("Maximum:", max_var)
+        print("Standardabweichung:", std_var)
+        print("-----------------------------")
+        
+    # Schleife über jede Wettervariable über die Zeit der Kiwo
+    kiwo_dataf = dataf[dataf["KielerWoche"] == 1] # Filter dataf DataFrame for KielerWoche
+
+    for var in weather_variables:
+        # Histogramm erstellen
+        plt.hist(kiwo_dataf[var], bins=95, color='skyblue', edgecolor='black')
+        plt.xlabel(var)
+        plt.ylabel('Häufigkeit')
+        plt.title(f'Histogramm der {var}')
+        plt.grid(True)
+        plt.show()
+        
+        # Grundlegende Parameter berechnen
+        mean_var = kiwo_dataf[var].mean()
+        median_var = kiwo_dataf[var].median()
+        min_var = kiwo_dataf[var].min()
+        max_var = kiwo_dataf[var].max()
+        std_var = kiwo_dataf[var].std()
+        
+        # Statistische Grundparameter ausgeben
+        print(f"\nStatistische Grundparameter für {var}:")
+        print("Mittlerer Wert:", mean_var)
+        print("Median:", median_var)
+        print("Minimum:", min_var)
+        print("Maximum:", max_var)
+        print("Standardabweichung:", std_var)
+        print("-----------------------------")
+    
+# Histogram und Grundparameter Statistik für Warengruppen erstellen
+
+    # Histogramm erstellen für gesamtes Jahr
+    plt.hist(umsatz_df["Warengruppe"], bins=6, color='green', edgecolor='black')
+    plt.xlabel("Warenguppe")
+    plt.ylabel('Häufigkeit')
+    plt.title(f'Histogramm der {"Warenguppe"}')
+    plt.grid(True)
+    plt.show()
+    
+    # Histogramm erstellen für Kiwozeit
+    plt.hist(kiwo_dataf["Warengruppe"], bins=5, color='green', edgecolor='black')
+    plt.xlabel("Warenguppe")
+    plt.ylabel('Häufigkeit')
+    plt.title(f'Histogramm der {"Warenguppe"}')
+    plt.grid(True)
+    plt.show()
+            
