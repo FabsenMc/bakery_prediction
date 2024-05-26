@@ -1,4 +1,4 @@
-###                    (1) DATA PREPARATION                    ###
+###          Data preparation          ###
 
 # import libraries before start
 import pandas as pd
@@ -39,12 +39,23 @@ dataf = daten.merge(umswar, on="Datum", how = "outer") \
 # Ausgabe der ersten 5 Zeilen des neuen DataFrames
 print(dataf.head())
 
+## Featureengineering
+
+# Hinzufügen einer zusätzlichen Spalte Regen ja/nein
+dataf["Regen"] = dataf["Beschreibung"].str.contains("Regen", case=False, na=False)
+dataf["Regen"] = dataf["Regen"].map({True: 1, False: 0})
+
 # Hinzufügen einer zusätzlichen Spalte mit den Wochentagen
 dataf["Datum"] = pd.to_datetime(dataf["Datum"])
 dataf["Wochentag"] = dataf["Datum"].dt.weekday
 dataf["Wochentag"] = dataf["Wochentag"].map({0: "Montag", 1: "Dienstag", 2: "Mittwoch", 3: "Donnerstag", 4: "Freitag", 5: "Samstag", 6: "Sonntag"}) #-> der ML Algorythmus kann ja nur mit Zahlen umgehen
 
-#dataf.sort_values(by="Datum", inplace=True) -> anfangs hatte er hier falsch sortiert
+# Hinzufügen einer zusätzlichen Spalte mit den Wochenenden
+dataf["Wochenende"] = dataf["Wochentag"].map({"Montag": 0, "Dienstag": 0, "Mittwoch": 0, "Donnerstag": 0, "Freitag": 0, "Samstag": 1, "Sonntag": 1})
 
-# Ausgabe der ersten 5 Zeilen des neuen DataFrames
+# Hinzufügen einer zusätzlichen Spalte mit den Jahreszeiten Frühling Sommer Herbst und Winter (FSHW) in Abhängigkeit des Datums
+dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month
+dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month.map({1: 4, 2: 4, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2, 9: 3, 10: 3, 11: 3, 12: 4})
+
+# Ausgabe der ersten 5 Zeilen des gemergten DataFrames
 print(dataf.head())
