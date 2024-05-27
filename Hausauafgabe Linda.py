@@ -69,3 +69,29 @@ plt.ylabel('Umsatz')
 plt.legend()
 plt.grid(True)
 plt.show()
+# Klassifizierung der Temperaturdaten in 5-Schritten
+bin_edges = range(-30, 41, 5)
+labels = ['-30--25', '-25--20', '-20--15', '-15--10', '-10--5', '-5-0', '0-5', '5-10', '10-15', '15-20', '20-25', '25-30', '30-35', '35-40']
+merged_df['Temperaturklasse'] = pd.cut(merged_df['Temperatur'], bins=bin_edges, labels=labels[:-1])
+
+# Feature Engineering: Hinzufügen der Jahreszeit
+merged_df['Datum'] = pd.to_datetime(merged_df['Datum'])
+merged_df['Jahreszeit'] = merged_df['Datum'].dt.month.apply(lambda x: 'Winter' if x in [12, 1, 2] else 'Frühling' if x in [3, 4, 5] else 'Sommer' if x in [6, 7, 8] else 'Herbst')
+
+# Modellbildung
+X = pd.get_dummies(merged_df[['Temperaturklasse', 'Jahreszeit']], drop_first=True)
+X = sm.add_constant(X)
+y = merged_df['Umsatz']
+model = sm.OLS(y, X).fit()
+
+# Modellbewertung
+print(model.summary())
+
+# Grafische Darstellung der Vorhersagen im Vergleich zu den tatsächlichen Umsätzen
+plt.figure(figsize=(10, 6))
+plt.scatter(model.fittedvalues, model.resid)
+plt.xlabel('Vorhergesagte Werte')
+plt.ylabel('Residuen')
+plt.title('Residuenplot')
+plt.axhline(y=0, color='r', linestyle='-')
+plt.show()
