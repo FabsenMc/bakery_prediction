@@ -14,29 +14,8 @@ url1 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/kiwo.c
 url2 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/umsatzdaten_gekuerzt.csv"
 url3 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/wetter.csv"
 url4 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/Wettercodes.csv"
-url5 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/Feiertage%20SH.csv"
+url5 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/fuf_v2.csv"
 url6 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/thw-kiel-spieltage.csv"
-
-# Einlesen der Feriendaten 2013-2017 als URLs
-url13 = 'https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/publicholiday.DE.2013.csv'
-url14 = 'https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/publicholiday.DE.2014.csv'
-url15 = 'https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/publicholiday.DE.2015.csv'
-url16 = 'https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/publicholiday.DE.2016.csv'
-url17 = 'https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/publicholiday.DE.2017.csv'
-url18 = 'https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/publicholiday.DE.2018.csv'
-
-#Überführen der Feriendaten in DataFrames
-feiertage13 = pd.read_csv(url13)
-feiertage14 = pd.read_csv(url14)
-feiertage15 = pd.read_csv(url15)
-feiertage16 = pd.read_csv(url16)
-feiertage17 = pd.read_csv(url17)
-feiertage18 = pd.read_csv(url18)
-# Zusammenführen der Feiertagsdaten zu einem einzigen DataFrame
-alle_feiertage = pd.concat([feiertage13, feiertage14, feiertage15, feiertage16, feiertage17, feiertage18], ignore_index=True)
-
-# Konvertieren der Datumsangaben in den Feiertagsdaten in den datetime-Datentyp
-alle_feiertage["Date"] = pd.to_datetime(alle_feiertage["Date"])
 
 # Überführen der weiteren Daten in DataFrames
 daten = pd.read_csv(url1) # Daten der Kiwo
@@ -45,7 +24,6 @@ wetter = pd.read_csv(url3) # Wetterdaten der Kiwos
 wetterc = pd.read_csv(url4) # Wettercodes
 thw = pd.read_csv(url6) # THW Kiel Spieltage
 ferien = pd.read_csv(url5) # Feriendaten
-
 
 # Anzeige der ersten Zeilen der DataFrames
 print(daten.head()) # Ausgabe der ersten 5 Zeilen
@@ -56,12 +34,14 @@ print(thw.head()) # Ausgabe der ersten 5 Zeilen
 print(ferien.head()) # Ausgabe der ersten 5 Zeilen
 
 
+# Convert the date format from DD.MM.YYYY to MM/DD/YYYY
+ferien['Datum'] = pd.to_datetime(ferien['Datum'], dayfirst=True).dt.strftime('%Y-%m-%d')
 
 # Die 3 DataFrames zusammenführen (mergen) in einen neuen gemeinsamen DataFrame mit der Methode "outer"
 dataf = daten.merge(umswar, on="Datum", how = "outer") \
              .merge(wetter, on="Datum", how = "outer") \
              .merge(wetterc, on="Wettercode", how = "outer") \
-             .merge(ferien[["Datum", "FerienSH"]], on="Datum", how = "outer") \
+             .merge(ferien, on="Datum", how = "outer") \
              .merge(thw, on="Datum", how = "outer")
 
 # Ausgabe der ersten 5 Zeilen des neuen DataFrames
@@ -85,8 +65,6 @@ dataf["Wochenende"] = dataf["Wochentag"].map({"Montag": 0, "Dienstag": 0, "Mittw
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month.map({1: 4, 2: 4, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2, 9: 3, 10: 3, 11: 3, 12: 4})
 
-# Hinzufügen einer zusätzlichen Spalte mit Feiertagen 
-dataf["Feiertage"] = dataf["Datum"].isin(alle_feiertage["Date"]).astype(int)
 
 # Ausgabe der ersten 5 Zeilen des gemergten DataFrames
 print(dataf.head())
