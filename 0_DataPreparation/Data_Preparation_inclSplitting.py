@@ -17,13 +17,15 @@ url4 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_Data
 url5 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/Feiertage%20SH.csv"
 url6 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/thw-kiel-spieltage.csv"
 
+# Einlesen der Feriendaten 2013-2017 als URLs
+url13 = '/workspaces/bakery_prediction/0_DataPreparation/publicholiday.DE.2013.csv'
 # Überführen der Daten in DataFrames
 daten = pd.read_csv(url1) # Daten der Kiwo
 umswar = pd.read_csv(url2) # Umsätze der Warengruppen
 wetter = pd.read_csv(url3) # Wetterdaten der Kiwos
 wetterc = pd.read_csv(url4) # Wettercodes
 thw = pd.read_csv(url6) # THW Kiel Spieltage
-ferien = pd.read_csv(url6) # Feriendaten
+ferien = pd.read_csv(url5) # Feriendaten
 
 # Anzeige der ersten Zeilen der DataFrames
 print(daten.head()) # Ausgabe der ersten 5 Zeilen
@@ -63,9 +65,9 @@ dataf["Wochenende"] = dataf["Wochentag"].map({"Montag": 0, "Dienstag": 0, "Mittw
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month.map({1: 4, 2: 4, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2, 9: 3, 10: 3, 11: 3, 12: 4})
 
+# Hinzufügen einer zusätzlichen Spalte mit Feiertagen
 # Ausgabe der ersten 5 Zeilen des gemergten DataFrames
 print(dataf.head())
-
 
 ### Splitting des Datensatzes####
 # Laden des Dataframes -> Gibt es hier ein bessere Version?
