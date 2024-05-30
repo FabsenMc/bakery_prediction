@@ -65,6 +65,15 @@ dataf["Wochenende"] = dataf["Wochentag"].map({"Montag": 0, "Dienstag": 0, "Mittw
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month.map({1: 4, 2: 4, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2, 9: 3, 10: 3, 11: 3, 12: 4})
 
+# Hinzufügen einer zusätzlichen Spalte Temperatur Kategorie # min -10, max: 32
+# Define the bin edges
+bins = [-10, -6, -1, 4, 9, 14, 19, 24, 29, 34]
+# Define the bin labels (one fewer than the number of bin edges)
+labels = ['-10 to -6', '-5 to -1', '0 to 4', '5 to 9', '10 to 14', '15 to 19', '20 to 24', '25 to 29', '30 to 34']
+
+# Use pd.cut() to create the new column "Temperatur_Kategorie"
+dataf['Temperatur_Kategorie'] = pd.cut(dataf['Temperatur'], bins=bins, labels=labels)
+
 
 # Ausgabe der ersten 5 Zeilen des gemergten DataFrames
 print(dataf.head())
