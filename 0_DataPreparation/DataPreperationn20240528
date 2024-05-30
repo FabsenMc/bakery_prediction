@@ -10,9 +10,9 @@ import seaborn as sns
 
 
 # Einlesen der Daten als URL
-url1 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/kiwo.csv"
-url2 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/umsatzdaten_gekuerzt.csv"
-url3 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/wetter.csv"
+url1 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/kiwo.csv"
+url2 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/umsatzdaten_gekuerzt.csv"
+url3 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/wetter.csv"
 url4 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/Wettercodes.csv"
 url5 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/Feiertage%20SH.csv"
 url6 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/thw-kiel-spieltage.csv"
