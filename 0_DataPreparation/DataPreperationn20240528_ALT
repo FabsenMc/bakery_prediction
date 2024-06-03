@@ -36,8 +36,8 @@ print(wetter.head()) # Ausgabe der ersten 5 Zeilen
 print(wetterc.head()) # Ausgabe der ersten 5 Zeilen
 print(ferien.head()) # Ausgabe der ersten 5 Zeilen
 print(thw.head()) # Ausgabe der ersten 5 Zeilen
-print(kium.head())
-print(weima.head())
+print(kium.head()) # Ausgabe der ersten 5 Zeilen
+print(weima.head()) # Ausgabe der ersten 5 Zeilen
 
 
 # Die 3 DataFrames zusammenführen (mergen) in einen neuen gemeinsamen DataFrame mit der Methode "outer"
@@ -47,7 +47,7 @@ dataf = daten.merge(umswar, on="Datum", how = "outer") \
              .merge(ferien, on="Datum", how = "outer") \
              .merge(thw, on="Datum", how = "outer") \
              .merge(kium, on="Datum", how = "outer") \
-             .merge(weima, on="Datum", how = "outer") \
+             .merge(weima, on="Datum", how = "outer")
 
 # Ausgabe der ersten 5 Zeilen des neuen DataFrames
 print(dataf.head())

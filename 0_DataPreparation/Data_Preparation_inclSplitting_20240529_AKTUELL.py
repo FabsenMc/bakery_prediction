@@ -10,28 +10,34 @@ import seaborn as sns
 
 
 # Einlesen der Daten als URL
-url1 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/kiwo.csv"
-url2 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/umsatzdaten_gekuerzt.csv"
-url3 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/wetter.csv"
+url1 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/kiwo.csv"
+url2 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/umsatzdaten_gekuerzt.csv"
+url3 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/wetter.csv"
 url4 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/Wettercodes.csv"
 url5 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/fuf_v2.csv"
 url6 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/thw-kiel-spieltage.csv"
+url7 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/kieler_umschlag.csv"
+url8 = "https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/weihnachtsmarkt.csv"
 
-# Überführen der weiteren Daten in DataFrames
+# Überführen der Daten in DataFrames
 daten = pd.read_csv(url1) # Daten der Kiwo
 umswar = pd.read_csv(url2) # Umsätze der Warengruppen
 wetter = pd.read_csv(url3) # Wetterdaten der Kiwos
 wetterc = pd.read_csv(url4) # Wettercodes
-thw = pd.read_csv(url6) # THW Kiel Spieltage
 ferien = pd.read_csv(url5) # Feriendaten
+thw = pd.read_csv(url6) # THW Kiel Spieltage
+kium = pd.read_csv(url7) # Kieler Umschlag Tage
+weima = pd.read_csv(url8) # Weihnachtsmarkt Tage
 
 # Anzeige der ersten Zeilen der DataFrames
 print(daten.head()) # Ausgabe der ersten 5 Zeilen
 print(umswar.head()) # Ausgabe der ersten 5 Zeilen 
 print(wetter.head()) # Ausgabe der ersten 5 Zeilen
 print(wetterc.head()) # Ausgabe der ersten 5 Zeilen
-print(thw.head()) # Ausgabe der ersten 5 Zeilen
 print(ferien.head()) # Ausgabe der ersten 5 Zeilen
+print(thw.head()) # Ausgabe der ersten 5 Zeilen
+print(kium.head()) # Ausgabe der ersten 5 Zeilen
+print(weima.head()) # Ausgabe der ersten 5 Zeilen
 
 
 # Convert the date format from DD.MM.YYYY to MM/DD/YYYY
@@ -42,7 +48,9 @@ dataf = daten.merge(umswar, on="Datum", how = "outer") \
              .merge(wetter, on="Datum", how = "outer") \
              .merge(wetterc, on="Wettercode", how = "outer") \
              .merge(ferien, on="Datum", how = "outer") \
-             .merge(thw, on="Datum", how = "outer")
+             .merge(thw, on="Datum", how = "outer") \
+             .merge(kium, on="Datum", how = "outer") \
+             .merge(weima, on="Datum", how = "outer")
 
 # Ausgabe der ersten 5 Zeilen des neuen DataFrames
 print(dataf.head())
@@ -55,11 +63,11 @@ dataf["Regen"] = dataf["Regen"].map({True: 1, False: 0})
 
 # Hinzufügen einer zusätzlichen Spalte mit den Wochentagen
 dataf["Datum"] = pd.to_datetime(dataf["Datum"])
-dataf["Wochentag"] = dataf["Datum"].dt.weekday
-dataf["Wochentag"] = dataf["Wochentag"].map({0: "Montag", 1: "Dienstag", 2: "Mittwoch", 3: "Donnerstag", 4: "Freitag", 5: "Samstag", 6: "Sonntag"}) #-> der ML Algorythmus kann ja nur mit Zahlen umgehen
+dataf["Wochentag_MDMDFSS"] = dataf["Datum"].dt.weekday
+#dataf["Wochentag"] = dataf["Wochentag"].map({0: "Montag", 1: "Dienstag", 2: "Mittwoch", 3: "Donnerstag", 4: "Freitag", 5: "Samstag", 6: "Sonntag"}) #-> der ML Algorythmus kann ja nur mit Zahlen umgehen
 
 # Hinzufügen einer zusätzlichen Spalte mit den Wochenenden
-dataf["Wochenende"] = dataf["Wochentag"].map({"Montag": 0, "Dienstag": 0, "Mittwoch": 0, "Donnerstag": 0, "Freitag": 0, "Samstag": 1, "Sonntag": 1})
+dataf["Wochenende"] = dataf["Wochentag_MDMDFSS"].map({0 : 0, 1 : 0, 2 : 0, 3 : 0, 4 : 0, 5 : 1, 6 : 1})
 
 # Hinzufügen einer zusätzlichen Spalte mit den Jahreszeiten Frühling Sommer Herbst und Winter (FSHW) in Abhängigkeit des Datums
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month
@@ -74,12 +82,21 @@ labels = ['-10 to -6', '-5 to -1', '0 to 4', '5 to 9', '10 to 14', '15 to 19', '
 # Use pd.cut() to create the new column "Temperatur_Kategorie"
 dataf['Temperatur_Kategorie'] = pd.cut(dataf['Temperatur'], bins=bins, labels=labels)
 
-
 # Ausgabe der ersten 5 Zeilen des gemergten DataFrames
 print(dataf.head())
 
-### Splitting des Datensatzes####
+# Speichern des DataFrames als CSV
+dataf.to_csv('dataf.csv', index=False)
+
+
+
+
+
+
+#### Splitting des Datensatzes ####
 # Laden des Dataframes -> Gibt es hier ein bessere Version?
+dataf = pd.read_csv('https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/dataf.csv')
+print(dataf.head())
 
 #DF nach Datum sortieren
 dataf = dataf.sort_values(by='Datum')
@@ -89,7 +106,7 @@ train_start_date = '2013-07-01'
 train_end_date = '2017-07-31'
 validation_end_date = '2018-07-31'
 
-# Spliten der Daten basierend auf den Datumsgrenzen
+# Splitten der Daten basierend auf den Datumsgrenzen
 train_data = dataf[(dataf['Datum']>= train_start_date) & (dataf['Datum'] <= train_end_date)]
 validation_data = dataf[(dataf['Datum'] > train_end_date) & (dataf['Datum'] <= validation_end_date)]
 
