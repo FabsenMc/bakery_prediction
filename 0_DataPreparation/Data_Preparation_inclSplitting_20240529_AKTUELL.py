@@ -75,9 +75,9 @@ dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month.map({1: 4, 2: 4, 3: 1, 4: 1, 
 
 # Hinzufügen einer zusätzlichen Spalte Temperatur Kategorie # min -10, max: 32
 # Define the bin edges
-bins = [-10, -6, -1, 4, 9, 14, 19, 24, 29, 34]
+bins = [-10, 10, 20, 35]
 # Define the bin labels (one fewer than the number of bin edges)
-labels = ['-10 to -6', '-5 to -1', '0 to 4', '5 to 9', '10 to 14', '15 to 19', '20 to 24', '25 to 29', '30 to 34']
+labels = ['Niedrig', 'Mittel', 'Hoch']
 
 # Use pd.cut() to create the new column "Temperatur_Kategorie"
 dataf['Temperatur_Kategorie'] = pd.cut(dataf['Temperatur'], bins=bins, labels=labels)
