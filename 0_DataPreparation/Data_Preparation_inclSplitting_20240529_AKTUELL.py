@@ -97,11 +97,11 @@ dataf.to_csv('dataf2.csv', index=False)
 
 #### Splitting des Datensatzes ####
 # Laden des Dataframes -> Gibt es hier ein bessere Version?
-dataf = pd.read_csv('https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/dataf.csv')
-print(dataf.head())
+dataf2 = pd.read_csv('https://raw.githubusercontent.com/FabsenMc/bakery_prediction/main/0_DataPreparation/dataf2.csv')
+print(dataf2.head())
 
 #DF nach Datum sortieren
-dataf = dataf.sort_values(by='Datum')
+dataf2 = dataf2.sort_values(by='Datum')
 
 # Definieren der Datumsgrenzen
 train_start_date = '2013-07-01'
@@ -109,14 +109,14 @@ train_end_date = '2017-07-31'
 validation_end_date = '2018-07-31'
 
 # Splitten der Daten basierend auf den Datumsgrenzen
-train_data = dataf[(dataf['Datum']>= train_start_date) & (dataf['Datum'] <= train_end_date)]
-validation_data = dataf[(dataf['Datum'] > train_end_date) & (dataf['Datum'] <= validation_end_date)]
+train_data = dataf2[(dataf2['Datum']>= train_start_date) & (dataf2['Datum'] <= train_end_date)]
+validation_data = dataf2[(dataf2['Datum'] > train_end_date) & (dataf2['Datum'] <= validation_end_date)]
 
 # Überprüfen der Dimensionen der Datensätze
 print("Training dataset dimensions:", train_data.shape)
 print("Validation dataset dimensions:", validation_data.shape)
 
 #Abspeichern der Datensätze als CSV
-dataf.to_csv('dataf.csv', index=False)
+#dataf2.to_csv('dataf2.csv', index=False)
 train_data.to_csv ('train_data.csv', index=False)
 validation_data.to_csv('validation_data.csv', index=False)
