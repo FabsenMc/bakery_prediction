@@ -88,7 +88,7 @@ dataf['Temperatur_Kategorie'] = pd.cut(dataf['Temperatur'], bins=bins, labels=la
 print(dataf.head())
 
 # Speichern des DataFrames als CSV
-dataf.to_csv('dataf2.csv', index=False)
+dataf.to_csv('dataf.csv', index=False)
 
 
 
