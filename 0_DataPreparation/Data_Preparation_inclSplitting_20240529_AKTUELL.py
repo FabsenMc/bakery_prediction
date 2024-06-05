@@ -74,9 +74,11 @@ dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month
 dataf["Jahreszeit_FSHW"] = dataf["Datum"].dt.month.map({1: 4, 2: 4, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2, 9: 3, 10: 3, 11: 3, 12: 4})
 
 # Hinzufügen einer zusätzlichen Spalte Temperatur Kategorie # min -10, max: 32
+if 'Temperatur_Kategorie' in dataf.columns:
+    dataf.drop(columns=['Temperatur_Kategorie'], inplace=True)
 # Define the bin edges
 bins = [-10, 10, 20, 35]
-# Define the bin labels (one fewer than the number of bin edges)
+# Define the bin labels
 labels = ['Niedrig', 'Mittel', 'Hoch']
 
 # Use pd.cut() to create the new column "Temperatur_Kategorie"
@@ -86,7 +88,7 @@ dataf['Temperatur_Kategorie'] = pd.cut(dataf['Temperatur'], bins=bins, labels=la
 print(dataf.head())
 
 # Speichern des DataFrames als CSV
-dataf.to_csv('dataf.csv', index=False)
+dataf.to_csv('dataf2.csv', index=False)
 
 
 
