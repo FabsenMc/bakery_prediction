@@ -24,7 +24,7 @@ gelandet. Bei den verwendeten Layern gab es bei unseren Versuchen keine weiteren
 Bei den Dropout-Rates sind wir zunächst mit jeweils 0.3 vor beiden Schichten gestartet. Das Einführen der beiden Dropout-Layer verbesserte die Qualität der Ergebnisse. Ein Absenken auf 0.2 und 0.1 erhöhte die Qualität weiter. Löschten wir die Dropout-Layer, wurde die Qualität hingegen wieder schlechter.
 Die Batch-Size haben wir nicht verändert.
 - **Implementation**
-Mittels Tensorflow – siehe Code
+Mittels Tensorflow – siehe Code "model_3_estimation_FINAL"
 - **Evaluation Metrics**
 Für die Bewertung des Tensorflow-Models wurde der MSE genutzt (Mean Squared Error) – nach dem Durchlauf jeder Epoche für die Gesamtdaten.
 Für die Bewertung der Ergebnisse auf Basis der sechs Produkte wurde hingegen der MAPE (Mean absolute percentage error) genutzt. Er zeigte die großen Ergebnisunterschiede bei den einzelnen Warengruppen: Sehr gute Vorhersagen bei Kategorie 5, schlechte bei Kategorie 6.
