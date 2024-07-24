@@ -10,17 +10,17 @@ In diesem Projekt streben wir an, mit Hilfe eines machine learning models eine U
 In unserem Ansatz werden wir zunächst die bestehenden Daten statistisch analysieren und gegebenfalls zusätzliche Informationen acquirieren, die für die Analyse von Vorteil sein könnten. Im Anschluss erstellen wir ein linerares Regressionsmodell, um erste Tendenzen zu finden und die Zusammenhänge und den Einfluss der einzelnen Faktoren zu ermittlen. Unter Zuhilfenahme der Information aus den ersten Schritten erstellen wir ein neuronales Netzwerk, welches im weiteren Verlauf immer  weiter  feinabgestimmt wird. Zuletzt wird es uns möglich sein, anhand von Testdaten vom 1. August 2018 bis zum 30. Juli 2019 eine Umsatzprognose zu erstellen. Um die enstehenden Ergebnisse zu bewerten, nutzen wir die MAPE-Metrik (Mean Absolute Percentage Error) für jede einzelne Backwarenkategorie.
 Alle finalen Skripte haben die Endung"FINAL", während unsere gesamten Zwischenschritte im Ordner "5_Outdated-trial-datasets-and-codes" abgelegt sind (geordnet nach den jeweiligen Einzelabschnitten).
 
-### Zusammenfassung der best möglichen Resultate
+### Zusammenfassung der best möglichen Resultate mit den Validierungsdaten
 
--   **Beste Model:** [Name of the best-performing model]
+-   **Beste Model:** [model_3]
 -   **Evaluations Metric:** MAPE
 -   **Resultate nach Kategorien**:
-    -   **Brot** (1): [XX]%
-    -   **Brötchen** (2): [XX]%
-    -   **Croissants** (3): [XX]%
-    -   **Süßwaren** (4): [XX]%
-    -   **Kuchen** (5): [XX]%
-    -   **Saisonales Brot** (6): [XX]%
+    -   **Brot** (1): [29,24]%
+    -   **Brötchen** (2): [17,76]%
+    -   **Croissants** (3): [22,05]%
+    -   **Süßwaren** (4): [28,97]%
+    -   **Kuchen** (5): [15,87]%
+    -   **Saisonales Brot** (6): [55,30]%
 
 ## Dokumentation
 
