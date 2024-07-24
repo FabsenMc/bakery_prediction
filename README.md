@@ -33,4 +33,4 @@ In unserem Ansatz werden wir zunächst die bestehenden Daten statistisch analysi
 
 ## Cover Image
 
-![](CoverImage/Cover_Image.jpg)
+![](CoverImage/Cover-Image.jpg)
