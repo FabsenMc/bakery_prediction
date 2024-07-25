@@ -4,7 +4,7 @@ Das Notebook Dataset_Characteristics enthält eine eingehende Analyse des Datens
 
 ## Dataset Overview
 
-Im ersten Schritt wollten wir hier ein besseres Verständniss über unseren gesamten Datensatz bekommen und haben die Größe des Datensatzes 
+Im ersten Schritt wollten wir hier ein besseres Verständniss über unseren gesamten Datensatz bekommen und haben den Umfang des Datensatzes betrachtet. 
 Der von uns erstellte Datensatz enthielt Umsatz-Daten vom 1. Juli 2013 bis zum 30.Juli 2018. Die von uns hinzugefügten Datens umfassten jedoch einen etwas größeren Bereich mit Start im Jahr 2012. Insgesamt umfasst der finale Datensatz somit 10437 Zeilen sowie 23 Spalten / Variablen. Die wichtigsten Variablen sind im Folgenden kurz dargestellt (unvollständige liste)
 
 | Spalte                  | Beschreibung                                                                             | Datentyp   |
