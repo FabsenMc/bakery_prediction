@@ -30,6 +30,17 @@ Alle finalen Skripte haben die Endung"FINAL", während unsere gesamten Zwischens
 5.  [**Model Definition and Evaluation**](3_Model/)
 6.  [**Presentation**](4_Presentation/README.md)
 
+## Team
+Unser Team besteht aus Fabian Bäumler, Linda Hapke, Björn Hansen und Inga Klare. 
+Insbesondere zum Start des Projektes haben wir viele Aufgabenbereiche gemeinsam bearbeitet und uns an den Aufgabenstellungen ausprobiert. 
+Zur späteren Fertigstellung der Aufgaben haben wir folgende Aufteilung gehabt:
+Data Preparation: Fabian Bäumler
+Data Characteristics: Inga Klare
+Baseline Model: Linda Hapke
+Neuronales Netz: Björn Hansen
+
+Insgesamt haben wir jedoch auch viel gemeinsam an aufgetretenden Problemen getüftelt. 
+
 ## Cover Image
 
 ![](CoverImage/Cover-Image.jpg)
