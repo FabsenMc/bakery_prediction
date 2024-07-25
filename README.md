@@ -32,15 +32,18 @@ Alle finalen Skripte haben die Endung"FINAL", während unsere gesamten Zwischens
 
 ## Team
 Unser Team besteht aus Fabian Bäumler, Linda Hapke, Björn Hansen und Inga Klare. 
-Insbesondere zum Start des Projektes haben wir viele Aufgabenbereiche gemeinsam bearbeitet und uns an den Aufgabenstellungen ausprobiert. 
+Insbesondere zum Start des Projektes haben wir viele Aufgabenbereiche gemeinsam bearbeitet und uns gemeinsam an den Aufgabenstellungen ausprobiert. 
 Zur späteren Fertigstellung der Aufgaben und Dokumentation haben wir folgende Aufteilung gehabt:
 
 Data Preparation: Fabian Bäumler
+
 Data Characteristics: Inga Klare
+
 Baseline Model: Linda Hapke
+
 Neuronales Netz: Björn Hansen
 
-Insgesamt haben wir jedoch auch, wie gesagt, viel gemeinsam an aufgetretenden Problemen getüftelt. 
+
 
 ## Cover Image
 
